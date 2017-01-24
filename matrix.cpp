@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cmath>
+#include <iomanip>
 #include "matrix.h"	
 
 Matrix::Matrix() 
@@ -49,6 +51,51 @@ double& Matrix::operator()(int r, int c)
 	}
 }
 
+void Matrix::factor()
+{
+	uMatrix = new double[nrows*ncols];
+
+	for(int i = 0; i < ncols*nrows; i++)
+		uMatrix[i] = data[i];
+
+
+	double multiplier;
+	for (int iteration = 0; iteration < nrows - 1; iteration++)	//iteration is the pivot row
+	{
+		
+		for(int row = iteration + 1; row < nrows; row++)
+			uMatrix[row*ncols+iteration] = 0; 
+		
+		for (int row = iteration + 1; row < nrows; row++)
+		{	
+			// save temporary values for multiplier
+			multiplier =  uMatrix[iteration*ncols+row]/uMatrix[iteration*ncols+iteration];
+			//cout << uMatrix[iteration*ncols+row] << '|' << uMatrix[iteration*ncols+iteration] << endl;
+			// performing row operations
+			for (int col = iteration + 1; col < ncols; col++)
+					uMatrix[row*ncols+col] = uMatrix[row*ncols+col] - (multiplier * uMatrix[iteration*ncols+col]);
+		}
+
+		/*
+		cout << "After iteration " << iteration << ":\n";
+		for (int row = 0; row < nrows; row++)
+		{
+			for (int col = 0; col < ncols; col++)
+				cout << setw(7) << fixed << setprecision(4) << uMatrix[row*ncols+col] << " ";
+			cout << endl;
+		}
+		*/
+	}
+	
+	cout << "Upper matrix: \n";
+	for (int row = 0; row < nrows; row++)
+	{
+		for (int col = 0; col < ncols; col++)
+			cout << setw(7) << fixed << setprecision(4) << uMatrix[row*ncols+col] << " ";
+		cout << endl;
+	}
+}
+
 ostream& operator<<(ostream &os, Matrix &m)
 {
 	cout << "Matrix:" << endl;
@@ -56,7 +103,7 @@ ostream& operator<<(ostream &os, Matrix &m)
 	int nval=m.getCol();
 	for (int i=0; i<mval;i++){
 		for(int j=0;j < nval ; j++)
-			os<< m(i,j) << ' ';
+			os<< setw(2) << m(i,j) << ' ';
 		os << endl;
 	}
 	return os;

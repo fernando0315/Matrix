@@ -7,52 +7,43 @@
 #include <fstream>
 #include "matrix.h"
 
-double matrix[9][9]; // max size is 9x9 matrix
-
 void MatrixText(int n);
 void BuildMatrix(int n);
 void PrintMatrix(int n);
+
+double matrix[9][9];
 
 using namespace std;
 
 int main() 
 {
-	Matrix a(2,2);
-	a(1,1) = 5.0;
-	a(0,0) = 6.0;
-	a(0,1) = 7.0;
-	a(1,0) = 8.0;
+	Matrix a(4,4);
+	a(0,0) = 13;
+	a(0,1) = -4;
+	a(0,2) = -3;
+	a(0,3) = -6;
+	a(1,0) = -4;
+	a(1,1) = 17;
+	a(1,2) = -2;
+	a(1,3) = 0;
+	a(2,0) = -3;
+	a(2,1) = -2;
+	a(2,2) = 11;
+	a(2,3) = -2;
+	a(3,0) = -6;
+	a(3,1) = 0;
+	a(3,2) = -2;
+	a(3,3) = 12;
 	cout << a << endl;
+	a.factor();
 	/*
-	// INITIALIZING ARRAY
-	cout << "Constructing an nxn matrix. Please insert a value for n: ";
-	int n; // number of rows/columns
-	cin >> n;
-
-	cout << "\nWould you like to\n\t(A) Get matrix from text file\n\t(B) Build your own matrix\n\nPlease input 'A' or 'B'\n";
-	char select;
-	int check;
-	do {
-		check = 0;
-		cin >> select; 
-		if (select == 'A')
-			MatrixText(n);
-		else if (select == 'B')
-			BuildMatrix(n);
-		else
-		{
-			cout << "\nPlease enter a valid character. 'A' or 'B'\n";
-			check = 1;
-		}
-	} while (check == 1);
-	PrintMatrix(n);
-
 	// UPPER MATRIX
 	double multiplier[9][9];
 	double Umatrix[9][9];
 	for (int row = 0; row < n; row++)
-	for (int col = 0; col < n; col++)
-	Umatrix[row][col] = matrix[row][col];
+		for (int col = 0; col < n; col++)
+			Umatrix[row][col] = matrix[row][col];
+	
 	for (int iteration = 0; iteration < n; iteration++)
 	{
 		for (int row = iteration + 1; row < n; row++)
@@ -131,9 +122,9 @@ void BuildMatrix(int n)
 	cout << "\nPlease insert values into the matrix:\n";
 	for (int row = 0; row < n; row++)
 	{
-	for (int col = 0; col < n; col++)
-	cin >> matrix[row][col];
-	cout << endl;
+		for (int col = 0; col < n; col++)
+			cin >> matrix[row][col];
+		cout << endl;
 	}
 }
 
@@ -142,9 +133,9 @@ void PrintMatrix(int n)
 	cout << "\nYour array is:\n";
 	for (int row = 0; row < n; row++)
 	{
-	for (int col = 0; col < n; col++)
-	cout << matrix[row][col] << " ";
-	cout << endl;
+		for (int col = 0; col < n; col++)
+			cout << matrix[row][col] << " ";
+		cout << endl;
 	}
 	cout << endl << endl;
 }
