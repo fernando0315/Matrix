@@ -17,6 +17,7 @@ using namespace std;
 
 int main() 
 {
+	
 	Matrix a(4,4);
 	a(0,0) = 13;
 	a(0,1) = -4;
@@ -34,6 +35,15 @@ int main()
 	a(3,1) = 0;
 	a(3,2) = -2;
 	a(3,3) = 12;
+	
+
+	/*
+	Matrix a(2,2);
+	a(0,0) = 4;
+	a(0,1) = 3;
+	a(1,0) = 6;
+	a(1,1) = 3;
+	*/
 	cout << a << endl;
 	a.factor();
 	/*
