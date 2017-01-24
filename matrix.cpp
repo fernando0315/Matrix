@@ -143,3 +143,38 @@ double Matrix::findDet()
 
 	return det;
 }
+
+double* Matrix::solve(double b[])
+{
+	double *x = new double[ncols];
+	double *z = new double[ncols];
+
+	//Calculate for z. Lz=B
+	double totalPrev;
+	for(int r = 0; r < nrows; r++)
+	{
+		totalPrev = 0;
+		for(int c = 0; c < r; c++) totalPrev += z[c] * lMatrix[r*ncols+c];
+		z[r] = b[r] - totalPrev;
+	}
+
+	//calculate for x from z. Ux=z
+	for(int r = nrows-1; r >= 0; r--)
+	{
+		totalPrev = 0;
+		for(int c = ncols-1; c > r; c--) totalPrev += x[c] * uMatrix[r*ncols+c];
+		x[r] = (z[r] - totalPrev) / uMatrix[r*ncols+r];
+	}
+
+	cout << "Value of z:" << endl;
+	for(int i = 0; i < ncols; i++)
+		cout << z[i] << endl;
+
+	cout << endl;
+
+	cout << "Value of x:" << endl;
+	for(int i = 0; i < ncols; i++)
+		cout << x[i] << endl;
+
+	return x;
+}
