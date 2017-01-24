@@ -17,8 +17,12 @@ using namespace std;
 
 int main() 
 {
-	cout << "checking" << endl;
-
+	Matrix a(2,2);
+	a(1,1) = 5.0;
+	a(0,0) = 6.0;
+	a(0,1) = 7.0;
+	a(1,0) = 8.0;
+	cout << a << endl;
 	/*
 	// INITIALIZING ARRAY
 	cout << "Constructing an nxn matrix. Please insert a value for n: ";
