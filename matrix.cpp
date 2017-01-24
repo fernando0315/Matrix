@@ -91,7 +91,12 @@ void Matrix::factor()
 		}
 		*/
 	}
-	
+
+
+}
+
+void Matrix::printUMatrix()
+{
 	cout << "Upper matrix: \n";
 	for (int row = 0; row < nrows; row++)
 	{
@@ -99,7 +104,10 @@ void Matrix::factor()
 			cout << setw(7) << fixed << setprecision(4) << uMatrix[row*ncols+col] << " ";
 		cout << endl;
 	}
+}
 
+void Matrix::printLMatrix()
+{
 	cout << "lower matrix: \n";
 	for (int row = 0; row < nrows; row++)
 	{

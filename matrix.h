@@ -10,6 +10,8 @@ public:
 	int getCol();
 	double& operator()(int, int);
 	void factor();
+	void printUMatrix();
+	void printLMatrix();
 	friend ostream& operator<< (ostream& os, Matrix& m);
 private:
 	void init(int, int);
