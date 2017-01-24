@@ -71,8 +71,10 @@ void Matrix::factor()
 			// save temporary values for multiplier
 			multiplier =  uMatrix[row*ncols+iteration]/uMatrix[iteration*ncols+iteration];
 			//cout << uMatrix[iteration*ncols+row] << '|' << uMatrix[iteration*ncols+iteration] << endl;
+
 			//Fill in the multiplier for lower matrix
 			lMatrix[row*ncols+iteration] = multiplier;
+			
 			// performing row operations
 			for (int col = iteration + 1; col < ncols; col++)
 					uMatrix[row*ncols+col] = uMatrix[row*ncols+col] - (multiplier * uMatrix[iteration*ncols+col]);
@@ -91,12 +93,12 @@ void Matrix::factor()
 		}
 		*/
 	}
-
-
 }
 
 void Matrix::printUMatrix()
 {
+	if(!uMatrix) factor();
+
 	cout << "Upper matrix: \n";
 	for (int row = 0; row < nrows; row++)
 	{
@@ -108,6 +110,8 @@ void Matrix::printUMatrix()
 
 void Matrix::printLMatrix()
 {
+	if(!lMatrix) factor();
+
 	cout << "lower matrix: \n";
 	for (int row = 0; row < nrows; row++)
 	{
@@ -128,4 +132,14 @@ ostream& operator<<(ostream &os, Matrix &m)
 		os << endl;
 	}
 	return os;
+}
+
+double Matrix::findDet()
+{
+	double det = 1;
+
+	for(int i = 0; i < nrows*ncols; i+=nrows+1)
+		det *= uMatrix[i];
+
+	return det;
 }

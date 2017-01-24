@@ -12,6 +12,7 @@ public:
 	void factor();
 	void printUMatrix();
 	void printLMatrix();
+	double findDet();
 	friend ostream& operator<< (ostream& os, Matrix& m);
 private:
 	void init(int, int);
