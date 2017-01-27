@@ -5,6 +5,7 @@ using namespace std;
 class Matrix {
 public:
 	Matrix();
+	~Matrix();
 	Matrix(int m, int n);
 	int getRow();
 	int getCol();

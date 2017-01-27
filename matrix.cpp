@@ -13,6 +13,16 @@ Matrix::Matrix(int m, int n)
 	init(m,n);
 }
 
+Matrix::~Matrix()
+{
+	if(uMatrix != NULL) delete[] uMatrix;
+	//cout << "test" << endl;
+	if(lMatrix != NULL) delete[] lMatrix;
+	//cout << "test" << endl;
+	//if(data != NULL) delete[] data;
+	//cout << "test" << endl;
+}
+
 int Matrix::getRow() 
 {
 	return nrows;
@@ -28,6 +38,8 @@ void Matrix::init(int m, int n)
 	nrows = m;
 	ncols = n;
 	data = new double[m*n];
+	lMatrix = NULL;
+	uMatrix = NULL;
 
 	for(int i=0; i<m*n; i++)
 		data[i] = 0;
@@ -53,8 +65,11 @@ double& Matrix::operator()(int r, int c)
 
 void Matrix::factor()
 {
-	uMatrix = new double[nrows*ncols];
-	lMatrix = new double[nrows*ncols];
+	if(!uMatrix)
+		uMatrix = new double[nrows*ncols];
+	
+	if(!lMatrix)
+		lMatrix = new double[nrows*ncols];
 
 	for(int i = 0; i < ncols*nrows; i++)
 		uMatrix[i] = data[i];
@@ -82,16 +97,6 @@ void Matrix::factor()
 
 		for(int row = iteration + 1; row < nrows; row++)
 			uMatrix[row*ncols+iteration] = 0; 
-
-		/*
-		cout << "After iteration " << iteration << ":\n";
-		for (int row = 0; row < nrows; row++)
-		{
-			for (int col = 0; col < ncols; col++)
-				cout << setw(7) << fixed << setprecision(4) << uMatrix[row*ncols+col] << " ";
-			cout << endl;
-		}
-		*/
 	}
 }
 
@@ -170,7 +175,7 @@ double* Matrix::solve(double b[])
 	for(int i = 0; i < ncols; i++)
 		cout << z[i] << endl;
 
-	cout << endl;
+	//cout << endl;
 
 	cout << "Value of x:" << endl;
 	for(int i = 0; i < ncols; i++)
