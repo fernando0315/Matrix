@@ -108,7 +108,7 @@ void Matrix::printUMatrix()
 	for (int row = 0; row < nrows; row++)
 	{
 		for (int col = 0; col < ncols; col++)
-			cout << setw(7) << fixed << setprecision(4) << uMatrix[row*ncols+col] << " ";
+			cout << setw(8) << fixed << right << setprecision(4) << uMatrix[row*ncols+col] << " ";
 		cout << endl;
 	}
 }
@@ -117,11 +117,11 @@ void Matrix::printLMatrix()
 {
 	if(!lMatrix) factor();
 
-	cout << "lower matrix: \n";
+	cout << "Lower matrix: \n";
 	for (int row = 0; row < nrows; row++)
 	{
 		for (int col = 0; col < ncols; col++)
-			cout << setw(7) << fixed << setprecision(4) << lMatrix[row*ncols+col] << " ";
+			cout << setw(8) << fixed << setprecision(4) << lMatrix[row*ncols+col] << " ";
 		cout << endl;
 	}
 }
@@ -133,7 +133,7 @@ ostream& operator<<(ostream &os, Matrix &m)
 	int nval=m.getCol();
 	for (int i=0; i<mval;i++){
 		for(int j=0;j < nval ; j++)
-			os<< setw(2) << m(i,j) << ' ';
+			os<< setw(3) << m(i,j) << ' ';
 		os << endl;
 	}
 	return os;
