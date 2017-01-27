@@ -15,6 +15,7 @@ public:
 	void printLMatrix();
 	double findDet();
 	double* solve(double b[]);
+	double* findInv();
 	friend ostream& operator<< (ostream& os, Matrix& m);
 private:
 	void init(int, int);

@@ -171,6 +171,7 @@ double* Matrix::solve(double b[])
 		x[r] = (z[r] - totalPrev) / uMatrix[r*ncols+r];
 	}
 
+	/*
 	cout << "Value of z:" << endl;
 	for(int i = 0; i < ncols; i++)
 		cout << z[i] << endl;
@@ -180,6 +181,33 @@ double* Matrix::solve(double b[])
 	cout << "Value of x:" << endl;
 	for(int i = 0; i < ncols; i++)
 		cout << x[i] << endl;
+	*/
 
 	return x;
+}
+
+double* Matrix::findInv()
+{
+	double *invMatrix = new double[nrows * ncols];
+	double *invRow = NULL;
+	double *b = new double[nrows];
+	b[0] = 1;
+
+	for(int i = 0; i < ncols; i++)
+	{
+		if(i > 0)
+		{
+			b[i-1] = 0;
+			b[i] = 1;
+		}
+
+		invRow = solve(b);
+
+		for(int j = 0; j < nrows; j++)
+		{
+			invMatrix[j*ncols+i] = invRow[j]; 
+		}
+	}
+
+	return invMatrix;
 }
